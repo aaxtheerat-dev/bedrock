@@ -1,0 +1,11 @@
+export function isPlayerLookingAt(player, entity){
+  const dir = player.getViewDirection();
+  const toEntity = {
+    x: entity.location.x - player.location.x,
+    y: entity.location.y - player.location.y,
+    z: entity.location.z - player.location.z
+  };
+  const mag = Math.sqrt(toEntity.x**2 + toEntity.y**2 + toEntity.z**2);
+  if(mag===0) return false;
+  return ((dir.x*toEntity.x + dir.y*toEntity.y + dir.z*toEntity.z)/mag) > 0.95;
+}
