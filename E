@@ -1,0 +1,19 @@
+import { isPlayerLookingAt } from "./look_detection.js";
+
+export function stalkingTick(player){
+  const entities = player.dimension.getEntities({ type:"the_obsessed:obsessed", location:player.location, maxDistance:18 });
+  if(!entities.length) return;
+  const entity = entities[0];
+  let sanity = player.getDynamicProperty("sanity") ?? 100;
+  sanity -= 0.6;
+  player.setDynamicProperty("sanity", sanity);
+
+  if(Math.random() < 0.1) player.playSound("obsessed.breathing",{volume:0.8});
+  if(isPlayerLookingAt(player, entity)){
+    const loc = player.location;
+    const view = player.getViewDirection();
+    if(Math.random() < 0.7){
+      entity.teleport({x:loc.x - view.x*10, y:loc.y, z:loc.z - view.z*10});
+    }else entity.triggerEvent("the_obsessed:vanish");
+  }
+}
