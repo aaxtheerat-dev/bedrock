@@ -1,0 +1,6 @@
+export function initSanity(player){ player.setDynamicProperty("sanity",100); }
+export function tickSanity(player){
+  let sanity = player.getDynamicProperty("sanity") ?? 100;
+  sanity = Math.max(0, sanity);
+  player.setDynamicProperty("sanity", sanity);
+}
