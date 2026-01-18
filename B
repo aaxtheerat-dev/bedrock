@@ -1,0 +1,16 @@
+import { world, system } from "@minecraft/server";
+import { initSanity, tickSanity } from "./sanity.js";
+import { spawnTick } from "./spawn_manager.js";
+import { stalkingTick } from "./stalking.js";
+import { cameraTick } from "./camera_effects.js";
+
+world.afterEvents.playerSpawn.subscribe(e => initSanity(e.player));
+
+system.runInterval(() => {
+  for (const player of world.getPlayers()) {
+    tickSanity(player);
+    spawnTick(player);
+    stalkingTick(player);
+    cameraTick(player);
+  }
+}, 20);
