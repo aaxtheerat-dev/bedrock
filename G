@@ -1,0 +1,5 @@
+export function cameraTick(player){
+  const sanity = player.getDynamicProperty("sanity") ?? 100;
+  if(sanity < 25 && Math.random() < 0.05)
+    player.runCommandAsync(`camera @s shake add 0.25 0.6 positional`);
+}
