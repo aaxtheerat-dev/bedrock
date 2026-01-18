@@ -1,0 +1,15 @@
+import { world } from "@minecraft/server";
+export function spawnTick(player){
+  const now = world.getAbsoluteTime();
+  const last = player.getDynamicProperty("lastObsessedSpawn") ?? 0;
+  if(now - last < 1200) return;
+  if(Math.random() < 0.002){
+    const loc = player.location;
+    world.spawnEntity("the_obsessed:obsessed", {
+      x: loc.x + (Math.random()*16-8),
+      y: loc.y,
+      z: loc.z + (Math.random()*16-8)
+    });
+    player.setDynamicProperty("lastObsessedSpawn", now);
+  }
+}
