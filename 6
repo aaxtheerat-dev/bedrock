@@ -1,0 +1,13 @@
+{
+  "format_version":"1.10.0",
+  "animation_controllers":{
+    "controller.animation.obsessed":{
+      "initial_state":"idle",
+      "states":{
+        "idle":{"animations":["animation.obsessed.idle"],"transitions":[{"walking":"query.modified_move_speed>0.01"},{"twitch":"Math.random()<0.002"}]},
+        "walking":{"animations":["animation.obsessed.walk"],"transitions":[{"idle":"query.modified_move_speed<0.01"},{"twitch":"Math.random()<0.002"}]},
+        "twitch":{"animations":["animation.obsessed.twitch"],"transitions":[{"idle":"query.life_time>0.2"}]}
+      }
+    }
+  }
+}
